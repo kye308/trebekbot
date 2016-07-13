@@ -169,7 +169,7 @@ def process_answer(params)
       $redis.setex(answered_key, ENV["SECONDS_TO_ANSWER"], "true")
     else
       score = update_score(user_id, (current_question["value"] * -1))
-      reply = "That is incorrect, #{get_slack_name(user_id)}. Your score is now #{currency_format(score)}."
+      reply = "That is incorrect, #{get_slack_name(user_id)}. The correct answer was #{current_answer}. Your score is now #{currency_format(score)}."
       $redis.setex(answered_key, ENV["SECONDS_TO_ANSWER"], "true")
     end
   end
